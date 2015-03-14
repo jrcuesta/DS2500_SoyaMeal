@@ -1,5 +1,6 @@
 #LAB values for Samples selected for Trainning Set:
 hsoja.Ymod   #Lab data
+
 #LAB values for Samples selected for Validation Set:
 hsoja.Ytest
 #Spectra of Samples selected for Trainning Set(dup$model)
@@ -18,9 +19,14 @@ hsoja.mod<-data.frame(hsoja.Ymod,Class=I(class.mod),NIR=I(hsoja.Xmod))
 hsoja.test<-data.frame(hsoja.Ytest,Class=I(class.test),NIR=I(hsoja.Xtest))
 #Combining Training and Test Set into a Dataframe.
 hsoja<-rbind(hsoja.mod,hsoja.test)
-##################  Developing the model
+##################  Developing the model for Protein
 library(pls)
-mod1<-plsr(hsoja.mod$Protein~hsoja.mod$NIR,data=hsoja.mod,ncomp=5,validation="LOO")
-summary(mod1)
-hsoja.testpred<-as.numeric(predict(mod1,ncomp=3,newdata=hsoja.test$NIR))
-monitor10ftest(hsoja.Ytest$ID,hsoja.testpred,hsoja.Ytest$Protein)
+mod1prot<-plsr(hsoja.mod$Protein~hsoja.mod$NIR,data=hsoja.mod,ncomp=5,validation="LOO")
+summary(mod1prot)
+hsoja.testpred.prot<-as.numeric(predict(mod1prot,ncomp=5,newdata=hsoja.test$NIR))
+monitor10ftest(hsoja.Ytest$ID,hsoja.testpred.prot,hsoja.Ytest$Protein)
+##################  Developing the model for Moisture
+mod1moi<-plsr(hsoja.mod$Moisture~hsoja.mod$NIR,data=hsoja.mod,ncomp=5,validation="LOO")
+summary(mod1moi)
+hsoja.testpred.moi<-as.numeric(predict(mod1moi,ncomp=5,newdata=hsoja.test$NIR))
+monitor10ftest(hsoja.Ytest$ID,hsoja.testpred.moi,hsoja.Ytest$Moisture)
