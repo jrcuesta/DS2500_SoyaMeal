@@ -19,7 +19,7 @@ hsoja.mod<-data.frame(hsoja.Ymod,Class=I(class.mod),NIR=I(hsoja.Xmod))
 hsoja.test<-data.frame(hsoja.Ytest,Class=I(class.test),NIR=I(hsoja.Xtest))
 #Combining Training and Test Set into a Dataframe.
 hsoja<-rbind(hsoja.mod,hsoja.test)
-##################  Developing the model for Protein
+##################  Developing the model for Protein with the Training Set
 library(pls)
 mod1prot<-plsr(hsoja.mod$Protein~hsoja.mod$NIR,data=hsoja.mod,ncomp=5,validation="LOO")
 summary(mod1prot)
@@ -29,5 +29,6 @@ monitor10ftest(hsoja.Ymod$ID,hsoja.modpred.prot,hsoja.Ymod$Protein)
 #Looking to the performance with the Test Set
 hsoja.testpred.prot<-as.numeric(predict(mod1prot,ncomp=5,newdata=hsoja.test$NIR))
 monitor10ftest(hsoja.Ytest$ID,hsoja.testpred.prot,hsoja.Ytest$Protein)
-
-
+##################  Developing the model for Protein with the Training + Test Set
+mod2prot<-plsr(hsoja$Protein~hsoja$NIR,data=hsoja,ncomp=8,validation="LOO")
+summary(mod2prot)
