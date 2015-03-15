@@ -25,8 +25,5 @@ mod1prot<-plsr(hsoja.mod$Protein~hsoja.mod$NIR,data=hsoja.mod,ncomp=5,validation
 summary(mod1prot)
 hsoja.testpred.prot<-as.numeric(predict(mod1prot,ncomp=5,newdata=hsoja.test$NIR))
 monitor10ftest(hsoja.Ytest$ID,hsoja.testpred.prot,hsoja.Ytest$Protein)
-##################  Developing the model for Moisture
-mod1moi<-plsr(hsoja.mod$Moisture~hsoja.mod$NIR,data=hsoja.mod,ncomp=5,validation="LOO")
-summary(mod1moi)
-hsoja.testpred.moi<-as.numeric(predict(mod1moi,ncomp=5,newdata=hsoja.test$NIR))
-monitor10ftest(hsoja.Ytest$ID,hsoja.testpred.moi,hsoja.Ytest$Moisture)
+
+
