@@ -23,6 +23,10 @@ hsoja<-rbind(hsoja.mod,hsoja.test)
 library(pls)
 mod1prot<-plsr(hsoja.mod$Protein~hsoja.mod$NIR,data=hsoja.mod,ncomp=5,validation="LOO")
 summary(mod1prot)
+#Checking performance with the Training Set (looking for outliers)
+hsoja.modpred.prot<-as.numeric(predict(mod1prot,ncomp=5,newdata=hsoja.mod$NIR))
+monitor10ftest(hsoja.Ymod$ID,hsoja.modpred.prot,hsoja.Ymod$Protein)
+#Looking to the performance with the Test Set
 hsoja.testpred.prot<-as.numeric(predict(mod1prot,ncomp=5,newdata=hsoja.test$NIR))
 monitor10ftest(hsoja.Ytest$ID,hsoja.testpred.prot,hsoja.Ytest$Protein)
 
