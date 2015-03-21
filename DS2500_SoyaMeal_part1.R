@@ -73,10 +73,17 @@ hsoja.Ymod<-hsoja.Y[c(80,9,149,136,93,3,36,44,79,119,125,
 hsoja.Ytest<-hsoja.Y[c(101,47,141,145,83,14,16,150,134,72,148,
                        84,8,158,65,10,151,62,59,22,140,29, 
                        109,98,137,122,75,142,111,12),]
-
+hsoja.Yrest<-hsoja.Y[-c(80,9,149,136,93,3,36,44,79,119,125,
+                        112,100,146,2,30,87,42,106,147,
+                        19,90,54,105,82,27,117,5,153,63,
+                        101,47,141,145,83,14,16,150,134,
+                        72,148,84,8,158,65,10,151,62,59,22,
+                        140,29,109,98,137,122,75,142,111,12),]
+hsoja.Yrest<-edit(hsoja.Yrest) #Changed NA by 0 for predictions.
 summary(hsoja.Y)
 hist(hsoja.Y$Protein,col="green")
 summary(hsoja.Ymod)
 hist(hsoja.Ymod$Protein,col="blue")
 summary(hsoja.Ytest)
 hist(hsoja.Ytest$Protein,col="violet")
+
