@@ -54,15 +54,23 @@ plot(shenk$pc[,1],shenk$pc[,2],xlab="PC1",ylab="PC2")
 points(shenk$pc[shenk$model,1],shenk$pc[shenk$model,2],pch=19,col="red")
 ################   DUPLEX  #####################################
 library(prospectr)
+library(chemometrics)
 dup<-duplex(X=h.soja.snvdt1d,k=30,metric="mahal",pc=3)
 par(mfrow=c(3,1),ps=14)
 plot(dup$pc[,1],dup$pc[,2],xlab="PC1",ylab="PC2")
+drawMahal(dup$pc[,1:2],center=apply(dup$pc[,1:2],2,mean),
+          covariance=cov(dup$pc[,1:2]),quantile=0.975)
+
 points(dup$pc[dup$model,1],dup$pc[dup$model,2],pch=19,col="red")
 points(dup$pc[dup$test,1],dup$pc[dup$test,2],pch=19,col="blue")
 plot(dup$pc[,1],dup$pc[,3],xlab="PC1",ylab="PC3")
+drawMahal(dup$pc[,c(1,3)],center=apply(dup$pc[,c(1,3)],2,mean),
+          covariance=cov(dup$pc[,c(1,3)]),quantile=0.975)
 points(dup$pc[dup$model,1],dup$pc[dup$model,3],pch=19,col="red")
 points(dup$pc[dup$test,1],dup$pc[dup$test,3],pch=19,col="blue")
 plot(dup$pc[,2],dup$pc[,3],xlab="PC2",ylab="PC3")
+drawMahal(dup$pc[,c(2,3)],center=apply(dup$pc[,c(2,3)],2,mean),
+          covariance=cov(dup$pc[,c(2,3)]),quantile=0.975)
 points(dup$pc[dup$model,2],dup$pc[dup$model,3],pch=19,col="red")
 points(dup$pc[dup$test,2],dup$pc[dup$test,3],pch=19,col="blue")
 
