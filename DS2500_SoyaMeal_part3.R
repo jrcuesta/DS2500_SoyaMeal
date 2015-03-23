@@ -13,3 +13,5 @@ drawMahal(Xmod.prcomp$x[,1:2],center=apply(Xmod.prcomp$x[,1:2],2,mean),
           covariance=cov(Xmod.prcomp$x[,1:2]),quantile=0.975,col="red")
 #To project the test set into this space, we have to calculate its 
 #scores in this new PC space first.
+res<-Moutlier(Xmod.prcomp$x[,1:2],quantile=0.975,plot=TRUE)
+res<-Moutlier(Xmod.prcomp$x[,2:3],quantile=0.975,plot=TRUE)
