@@ -20,17 +20,20 @@ matplot(wavelength1,t(hsoja.X),type="l",ylab="",xlab="Wavelength",col="black")
 par(new=T)
 #SNV
 hsoja.Xsnv<-standardNormalVariate(X=hsoja.X)
-matplot(wavelength1,t(hsoja.Xsnv),type="l",xaxt="n",yaxt="n",ylab="",xlab="",col="blue")
-#SNV and DT
+colnames(hsoja.Xsnv)<-wavelength1
+matplot(wavelength1,t(hsoja.Xsnv),type="l",ylab="Log 1/R",
+        xlab="Wavelength",col="blue")
+########SNV and DT
 hsoja.Xsnvdt<-detrend(X=hsoja.X,wav=as.numeric(colnames(hsoja.X)))
-par(new=T)
-matplot(wavelength1,t(hsoja.Xsnvdt),type="l",xaxt="n",yaxt="n",xlab="",ylab="",col="red")
+colnames(hsoja.Xsnvdt)<-wavelength1   
+matplot(wavelength1,t(hsoja.Xsnvdt),type="l",xlab="",ylab="",col="red")
 
-######## Apply derivatives ###########################
+######## Apply derivatives 
 h.soja.snvdt1d<-t(diff(t(hsoja.Xsnvdt),differences=1,lag=16))
 wavelength3<-seq(from=1108,to=2499.5, by=0.5)
-par(new=T)
-matplot(wavelength3,t(h.soja.snvdt1d),type="l",xaxt="n",yaxt="n",xlab="",ylab="",col="green")
+colnames(h.soja.snvdt1d)<-wavelength3
+matplot(wavelength3,t(h.soja.snvdt1d),type="l",xlab="Wavelength",ylab="Log 1/R",
+        col="green")
 
 #####################  All the sequence  ###########################3
 matplot(wavelength1,t(hsoja.X),type="l",
